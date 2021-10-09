@@ -1,0 +1,27 @@
+import math
+n = list(map(int,input().split()))
+
+if abs(n[0])<=10000 and abs(n[1])<=10000:
+    print("Desitkova soustava:",n[0],n[1])
+    n1hex = hex(n[0] & (2**32-1))[2:]
+    n2hex = hex(n[1] & (2**32-1))[2:]
+    print("Sestnactkova soustava:",n1hex,n2hex)
+    sum=n[0]+n[1]
+    print("Soucet:",n[0],"+",n[1],"=",sum)
+    sub=(n[0])-(n[1])
+    print("Rozdil:",n[0],"-",n[1],"=",sub)
+    mult=(n[0])*(n[1])
+    print("Soucin:",n[0],"*",n[1],"=",mult)
+    if (n[1])==0:
+        print("Nedefinovany vysledek!")
+    else:
+        if n[0]>=0 and n[1]>0:
+            div=n[0]//n[1]
+        else:
+            div=math.ceil(n[0]/n[1])
+        print("Podil:",n[0],"/",n[1],"=",div)
+    x=(n[0]+n[1])/2
+    avg=round(x,1)
+    print("Prumer:",avg)
+else:
+    print("Vstup je mimo interval!")
