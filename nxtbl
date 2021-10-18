@@ -1,0 +1,44 @@
+#define Kp 180
+#define offset 50
+#define HiSpeed 85
+#define Ki 20
+#define Kd 1200
+#define LowSpeed 20
+int actual, error, turn, powerB, powerC,
+integral, derivative, lasterror;
+task main()
+{
+SetSensorLight(IN_3);
+integral = 0;
+derivative = 0;
+lasterror = 0;
+do
+{
+OnFwd(OUT_BC, LowSpeed);
+}
+while (Sensor(IN_3) > offset);
+PlayTone(220,500);
+while (true)
+{
+actual = Sensor(IN_3);
+error = offset - actual;
+derivative = error - lasterror;
+turn = (Kp * error)+ (Ki * integral) + (Kd *
+derivative);
+turn = turn / 100;
+powerB = HiSpeed - turn;
+powerC = HiSpeed + turn;
+if (powerB < 0)
+{
+powerB = 0;
+}
+if (powerC > 100)
+{
+powerC = 100;
+}
+OnFwd(OUT_C,powerC);
+OnFwd(OUT_B,powerB);
+integral =+ error;
+lasterror = error;
+}
+}
