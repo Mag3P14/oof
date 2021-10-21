@@ -1,0 +1,59 @@
+a = int(input())
+b = int(input())
+lnum=abs(a-b)+1+(abs(a-b))
+n = max(a,b) #radky
+m = min(a,b) #sloupce
+j = min(a,b)
+
+def horizontaLine(lnum):
+    print("")
+    for i in range(0,lnum):
+        print("-",end='')
+    print("")
+
+def primetest(n):
+    n=abs(n)
+    for i in range(2,n+1):
+        if n==1:
+            return False
+        if i==n:
+            return True
+        if n%i==0:
+            return False
+
+def nsd(a,b):
+    if(b==0):
+        return a
+    else:
+        return nsd(b,a%b)
+
+def divis(a,b):
+    if nsd(a,b)>1: 
+        return True
+    elif a==b:
+        return True
+    else:
+        return False
+
+#input check
+if a<2 or b<2 or a==b: 
+    print("ERROR")
+else:
+    while m<max(a,b)+1:
+        for i in range(min(a,b),max(a,b)+1):
+            if divis(i,m)==True:
+                print("x",end='')
+            elif divis(i,m)==False and primetest(m) or primetest(i):
+                print("p",end='')
+            else:
+                print(" ",end='')
+            if i<max(a,b):
+                print("|",end='')
+            #print("i",i,"m",m)
+        m+=1
+        if m==max(a,b)+1:
+            print("")
+        else:
+            horizontaLine(lnum)
+
+
